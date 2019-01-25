@@ -1,0 +1,28 @@
+    def _check_reward(self,agent):
+
+        #dit klopt nog niet helemaal heb ik het gevoel
+
+        # verdediger: krijgt -100 als de andere de overkant haalt, krijgt + 100 als hij op de positie van de andere graakt
+        #aanvaller: krijgt + 100 als hij de overkant haalt: krijgt -100 als de andere roomba op hem rijdt
+
+        if(self.state_friendly == self.state_enemy):
+
+            self.reward_friendly -=100
+            self.reward_enemy +=100
+
+        elif(self.state_friendly[1] == 600):
+
+            self.reward_friendly += 100
+            self.reward_enemy -= 100
+
+        else:
+            if(agent == "enemy"):
+                euclidean_distance = math.sqrt((self.state_friendly[0] - self.state_enemy[0]) ** 2 + (self.state_friendly[1] - self.state_enemy[1]) ** 2)
+                self.reward_enemy -= 0.001 * euclidean_distance
+                # print(euclidean_distance)
+            else:
+                distance = 600 - self.state_friendly[1]
+                self.reward_friendly -= 0.001 * distance
+                # print(distance)
+
+        return self.reward_friendly, self.reward_enemy
