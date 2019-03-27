@@ -113,7 +113,7 @@ def play(q_values_enemy, q_values_friendly, render, agent_to_play):
 env = gym.make("roomba-v0")
 actions = ["F","B","L","R","S"]
 
-q_values_enemy = read_file("Q_enemy3.txt")
+q_values_enemy = read_file("Q_enemy10_meer_episodes.txt")
 q_values_friendly = read_file("Q_friendly10_meer_episodes.txt")
 
 play(q_values_enemy, q_values_friendly, True, "friendly")
